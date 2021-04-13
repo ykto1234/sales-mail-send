@@ -178,6 +178,7 @@ class MainForm:
                         cell_index = mail_item.spread_sheet_no
                         spread_sheet.update_gspread_sheet(worksheet=self.sendlist_worksheet, cell_row=cell_index, cell_col=SEND_DATE_COL, update_value=now_str)
                         logger.info('スプレッドシートに送信日時書き込み完了')
+                        time.sleep(1.0)
                     else:
                         mail_skip_count += 1
                         logger.info('メールに必要なパラメータがないため、送信しない。スプレッドシート行番号：' + str(mail_item.spread_sheet_no))
@@ -210,9 +211,9 @@ def expexpiration_date_check():
 if __name__ == "__main__":
     logger.info('プログラム起動開始')
 
-    # 有効期限チェック
-    if not (expexpiration_date_check()):
-        logger.info("有効期限切れため、プログラム起動終了")
-        sys.exit(0)
+    # # 有効期限チェック
+    # if not (expexpiration_date_check()):
+    #     logger.info("有効期限切れため、プログラム起動終了")
+    #     sys.exit(0)
 
     app = MainForm()
